@@ -1,0 +1,5 @@
+watchingFilePath: ./data/watching-file.txt
+soundFilePath: ./data/tada.wav
+soundFileFormat: wav
+volume: 0.0
+debounceDelay: 10ms
