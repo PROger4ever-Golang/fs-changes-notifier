@@ -11,20 +11,47 @@ import (
 	"github.com/spf13/viper"
 )
 
+type SoundFileStruct struct {
+	FilePath     string  `mapstructure:"filePath"`
+	FileFormat   string  `mapstructure:"fileFormat"`
+	VolumeChange float64 `mapstructure:"volumeChange"`
+}
+
+type TelegramBotStruct struct {
+	Id              int64  `mapstructure:"id"`
+	Secret          string `mapstructure:"secret"`
+	RecipientChatId int64  `mapstructure:"recipientChatId"`
+
+	ParseMode   string `mapstructure:"parseMode"`
+	MessageText string `mapstructure:"messageText"`
+}
+
 type Struct struct {
-	WatchingFilePath string        `mapstructure:"watchingFilePath"`
-	SoundFilePath    string        `mapstructure:"soundFilePath"`
-	SoundFileFormat  string        `mapstructure:"soundFileFormat"`
-	Volume           float64       `mapstructure:"volume"`
-	DebounceDelay    time.Duration `mapstructure:"debounceDelay"`
+	WatchingFilePath    string        `mapstructure:"watchingFilePath"`
+	ChangeDebounceDelay time.Duration `mapstructure:"changeDebounceDelay"`
+
+	SoundFile   *SoundFileStruct   `mapstructure:"soundFile"`
+	TelegramBot *TelegramBotStruct `mapstructure:"telegramBot"`
 }
 
 var Config = &Struct{
-	WatchingFilePath: "",
-	SoundFilePath:    "",
-	SoundFileFormat:  "",
-	Volume:           0,
-	DebounceDelay:    0 * time.Millisecond,
+	WatchingFilePath:    "",
+	ChangeDebounceDelay: 0 * time.Millisecond,
+
+	SoundFile: &SoundFileStruct{
+		FilePath:     "",
+		FileFormat:   "",
+		VolumeChange: 0.0,
+	},
+
+	TelegramBot: &TelegramBotStruct{
+		Id:              0,
+		Secret:          "",
+		RecipientChatId: 0,
+
+		ParseMode:   "",
+		MessageText: "",
+	},
 }
 
 func getConfigPaths() (pathDirs []string, err error) {

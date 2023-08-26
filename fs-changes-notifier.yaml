@@ -1,5 +1,15 @@
 watchingFilePath: ./data/watching-file.txt
-soundFilePath: ./data/tada.wav
-soundFileFormat: wav
-volume: 0.0
-debounceDelay: 10ms
+changeDebounceDelay: 10ms
+
+soundFile:
+  filePath: ./data/tada.wav
+  fileFormat: wav
+  volumeChange: 3.0
+
+telegramBot:
+  id: 0
+  secret: $3cr3+
+  recipientChatId: 0
+
+  parseMode: HTML
+  messageText: <b>File increased</b>
